@@ -21,8 +21,7 @@ class Notebook
       index += 1
     end
   end
-
-
+  
   private
   def blank?
     title.empty?

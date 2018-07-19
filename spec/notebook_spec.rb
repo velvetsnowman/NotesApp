@@ -45,13 +45,10 @@ describe Notebook do
     end
     it { is_expected.to respond_to(:pick_note) }
     it 'should let a user pick a note title to view' do
-      allow(notebook).to receive(:gets).and_return("Daniel\n")
+      allow(notebook).to receive(:gets).and_return("Daniel\n", "good day\n")
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
-      allow(notebook).to receive(:gets).and_return("good day\n")
-      notebook.new_note
       expect(notebook.body).to eq "good day"
-      notebook.pick_note
       allow(notebook).to receive(:gets).and_return("1\n")
       expect(notebook.pick_note).to eq "Daniel - good day"
     end

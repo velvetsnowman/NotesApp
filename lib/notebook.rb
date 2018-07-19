@@ -34,3 +34,4 @@ class Notebook
     title.empty?
   end
 end
+Notebook.new.new_note

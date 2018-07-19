@@ -21,7 +21,14 @@ class Notebook
       index += 1
     end
   end
-  
+
+  def pick_note
+    view_titles
+    puts "What note would you like to see?"
+    input = gets.chomp.to_i
+    return "#{@list_of_notes[input-1][:title]} - #{@list_of_notes[input-1][:body]}"
+  end
+
   private
   def blank?
     title.empty?

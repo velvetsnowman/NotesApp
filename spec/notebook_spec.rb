@@ -3,7 +3,7 @@ require 'notebook'
 describe Notebook do
   subject(:notebook) {described_class.new}
 
-  describe 'new_note' do
+  describe '#new_note' do
     before do
       allow($stdout).to receive(:write)
     end
@@ -26,7 +26,7 @@ describe Notebook do
     end
   end
 
-  describe 'view_titles' do
+  describe '#view_titles' do
     before do
       allow($stdout).to receive(:write)
     end
@@ -35,21 +35,21 @@ describe Notebook do
       allow(notebook).to receive(:gets).and_return("Daniel\n")
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
-      expect{notebook.view_titles}.to output("1. Daniel\n").to_stdout
+      expect{notebook.view_titles}.to output("Entry 1. Daniel\n").to_stdout
     end
   end
 
-  describe 'pick_note' do
+  describe '#pick_note' do
     before do
       allow($stdout).to receive(:write)
     end
     it { is_expected.to respond_to(:pick_note) }
     it 'should let a user pick a note title to view' do
-      allow(notebook).to receive(:gets).and_return("Daniel\n", "good day\n")
+      allow(notebook).to receive(:gets).and_return("Daniel", "good day")
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
       expect(notebook.body).to eq "good day"
-      allow(notebook).to receive(:gets).and_return("1\n")
+      allow(notebook).to receive(:gets).and_return("1")
       expect(notebook.pick_note).to eq "Daniel - good day"
     end
   end

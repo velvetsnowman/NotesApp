@@ -55,7 +55,7 @@ class Notebook
 
   def pick_note
     view_titles
-    puts "What note would you like to see?"
+    puts "What note would you like to pick?"
     input = gets.chomp.to_i
     puts "#{@list_of_notes[input-1][:title]} - #{@list_of_notes[input-1][:body]}"
   end
@@ -66,4 +66,4 @@ class Notebook
   end
 end
 
-Notebook.new.notebook_menu
+#Notebook.new.notebook_menu

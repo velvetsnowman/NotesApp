@@ -13,10 +13,12 @@ class Notebook
   end
 
   def print_menu
-    puts "1. Input a new note"
-    puts "2. Show me all my notes"
-    puts "3. Pick a note"
-    puts "9. Exit"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    puts "1. Input a new note".upcase
+    puts "2. Show me all my notes".upcase
+    puts "3. Pick a note".upcase
+    puts "9. Exit".upcase
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   end
 
   def process(selection)
@@ -30,15 +32,15 @@ class Notebook
     when "9"
       exit
     else
-      puts "I don't know what you mean, try again"
+      puts "I don't know what you mean, enter a number from the list above"
     end
   end
 
   def new_note
-    puts "What is the title of your new note?"
+    puts "Title: ".upcase
     @title = gets.chomp
     fail 'Title is blank' if blank?
-    puts "What is the body of your new note?"
+    puts "Body: ".upcase
     @body = gets.chomp
     @list_of_notes << {:title => @title, :body => @body}
   end
@@ -46,7 +48,7 @@ class Notebook
   def view_titles
     index = 1
     @list_of_notes.each do |hash|
-      puts "#{index}. #{hash[:title]}"
+      puts "Entry #{index}. #{hash[:title]}"
       index += 1
     end
   end

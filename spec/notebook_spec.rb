@@ -17,11 +17,9 @@ describe Notebook do
       end
     end
     it 'should let a user add a new note' do
-      allow(notebook).to receive(:gets).and_return("Daniel\n")
+      allow(notebook).to receive(:gets).and_return("Daniel\n", "good day\n" )
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
-      allow(notebook).to receive(:gets).and_return("good day\n")
-      notebook.new_note
       expect(notebook.body).to eq "good day"
     end
   end
@@ -35,7 +33,7 @@ describe Notebook do
       allow(notebook).to receive(:gets).and_return("Daniel\n")
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
-      expect{notebook.view_titles}.to output("Entry 1. Daniel\n").to_stdout
+      expect{notebook.view_titles}.to output("Entry: 1. Daniel\n").to_stdout
     end
   end
 
@@ -45,11 +43,11 @@ describe Notebook do
     end
     it { is_expected.to respond_to(:pick_note) }
     it 'should let a user pick a note title to view' do
-      allow(notebook).to receive(:gets).and_return("Daniel", "good day")
+      allow(notebook).to receive(:gets).and_return("Daniel\n", "good day\n")
       notebook.new_note
       expect(notebook.title).to eq "Daniel"
       expect(notebook.body).to eq "good day"
-      allow(notebook).to receive(:gets).and_return("1")
+      allow(notebook).to receive(:gets).and_return("1\n")
       expect(notebook.pick_note).to eq "Daniel - good day"
     end
   end

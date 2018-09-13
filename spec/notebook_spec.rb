@@ -7,7 +7,7 @@ describe Notebook do
     before do
       allow($stdout).to receive(:write)
     end
-    it { is_expected.to respond_to(:new_note) }
+
     context 'title is empty' do
       it 'should raise an error' do
         allow(notebook).to receive(:gets).and_return("\n")
@@ -28,11 +28,10 @@ describe Notebook do
     before do
       allow($stdout).to receive(:write)
     end
-    it { is_expected.to respond_to(:view_titles) }
+
     it 'should let a user view a list of all note titles' do
       allow(notebook).to receive(:gets).and_return("Daniel\n")
       notebook.new_note
-      expect(notebook.title).to eq "Daniel"
       expect{notebook.view_titles}.to output("Entry: 1. Daniel\n").to_stdout
     end
   end
@@ -41,14 +40,12 @@ describe Notebook do
     before do
       allow($stdout).to receive(:write)
     end
-    it { is_expected.to respond_to(:pick_note) }
-    it 'should let a user pick a note title to view' do
+
+    specify do
       allow(notebook).to receive(:gets).and_return("Daniel\n", "good day\n")
       notebook.new_note
-      expect(notebook.title).to eq "Daniel"
-      expect(notebook.body).to eq "good day"
       allow(notebook).to receive(:gets).and_return("1\n")
-      expect(notebook.pick_note).to eq "Daniel - good day"
+      notebook.pick_note { is_expected.to include("Daniel - good day\n") }
     end
   end
  end

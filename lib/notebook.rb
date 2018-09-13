@@ -1,9 +1,36 @@
 class Notebook
-  attr_accessor :title, :body
+  attr_reader :title,
+              :body
 
   def initialize
     @list_of_notes = []
   end
+
+  def new_note
+    puts "TITLE: "
+    @title = gets.chomp
+    fail 'Title is blank' if blank?
+    puts "BODY: "
+    @body = gets.chomp
+    @list_of_notes << {:title => @title, :body => @body}
+  end
+
+  def view_titles
+    index = 1
+    @list_of_notes.each do |hash|
+      puts "Entry: #{index}. #{hash[:title]}"
+      index += 1
+    end
+  end
+
+  def pick_note
+    view_titles
+    puts "What note would you like to see?"
+    input = gets.chomp.to_i
+    puts "#{@list_of_notes[input-1][:title]} - #{@list_of_notes[input-1][:body]}"
+  end
+
+  private
 
   def notebook_menu
     loop do
@@ -42,30 +69,6 @@ class Notebook
     end
   end
 
-  def new_note
-    puts "TITLE: "
-    @title = gets.chomp
-    fail 'Title is blank' if blank?
-    puts "BODY: "
-    @body = gets.chomp
-    @list_of_notes << {:title => @title, :body => @body}
-  end
-
-  def view_titles
-    index = 1
-    @list_of_notes.each do |hash|
-      puts "Entry: #{index}. #{hash[:title]}"
-      index += 1
-    end
-  end
-
-  def pick_note
-    view_titles
-    puts "What note would you like to see?"
-    input = gets.chomp.to_i
-    puts "#{@list_of_notes[input-1][:title]} - #{@list_of_notes[input-1][:body]}"
-  end
-
   def save_notes
     file = File.open("my_notes.csv", "w")
     @list_of_notes.each do |note|
@@ -85,7 +88,6 @@ class Notebook
     file.close
   end
 
-  private
   def blank?
     title.empty?
   end

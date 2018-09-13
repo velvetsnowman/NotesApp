@@ -1,10 +1,10 @@
-
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-group :development, :test do
+gem 'rake'
+gem 'rubocop', '0.56.0'
+
+group :test do
   gem 'rspec'
 end
-
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }

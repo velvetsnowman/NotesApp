@@ -5,6 +5,13 @@ class Notebook
   def initialize
     @list_of_notes = []
   end
+  
+  def notebook_menu
+    loop do
+      print_menu
+      process(STDIN.gets.chomp)
+    end
+  end
 
   def new_note
     puts "TITLE: "
@@ -31,13 +38,6 @@ class Notebook
   end
 
   private
-
-  def notebook_menu
-    loop do
-      print_menu
-      process(STDIN.gets.chomp)
-    end
-  end
 
   def print_menu
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"

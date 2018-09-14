@@ -27,6 +27,13 @@ To play around with my code follow these instructions:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 * Within your terminal, type the number of the option you wish to choose, I recommend inputting `1`
+
+* For testing please run
+
+```
+* rspec
+```
+
 * Enjoy
 
 
